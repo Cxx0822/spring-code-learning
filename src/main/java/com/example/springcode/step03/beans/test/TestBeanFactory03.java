@@ -4,7 +4,7 @@ import com.example.springcode.step03.beans.factory.config.BeanDefinition;
 import com.example.springcode.step03.beans.factory.support.DefaultListableBeanFactory;
 import com.example.springcode.step03.beans.service.DemoService;
 
-public class TestBeanFactory {
+public class TestBeanFactory03 {
     public void test() {
         // 1. 初始化BeanFactory
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();

@@ -1,10 +1,10 @@
-package com.example.springcode.step04.beans.test;
+package com.example.springcode.step05.beans.test;
 
-import com.example.springcode.step04.beans.factory.config.BeanDefinition;
-import com.example.springcode.step04.beans.factory.support.DefaultListableBeanFactory;
-import com.example.springcode.step04.beans.service.DemoService;
+import com.example.springcode.step05.beans.factory.config.BeanDefinition;
+import com.example.springcode.step05.beans.factory.support.DefaultListableBeanFactory;
+import com.example.springcode.step05.beans.service.DemoService;
 
-public class TestBeanFactory {
+public class TestBeanFactory05 {
     public void test() {
         // 1. 初始化BeanFactory
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
@@ -24,7 +24,7 @@ public class TestBeanFactory {
 }
 
 // 说明文档
-// 对比03的版本 主要增加了有参构造函数的Bean创建
+// 对比04的版本 主要增加了为Bean对象注入属性的功能
 // 1. 定义了一个根据bean名称实例化Bean类的策略接口InstantiationStrategy
 // 2. 定义了两种具体实例化Bean类的策略类SimpleInstantiationStrategy和CglibSubclassingInstantiationStrategy
 //    主要原理就是根据反射获取类的信息,并判断是否包含构造函数来实例化类

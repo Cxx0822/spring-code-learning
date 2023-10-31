@@ -1,6 +1,6 @@
 package com.example.springcode;
 
-import com.example.springcode.step04.beans.test.TestBeanFactory;
+import com.example.springcode.step04.beans.test.TestBeanFactory04;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringCodeApplicationTests {
     @Test
     void testBeanFactory() {
-        TestBeanFactory test = new TestBeanFactory();
+        TestBeanFactory04 test = new TestBeanFactory04();
         test.test();
     }
 }
