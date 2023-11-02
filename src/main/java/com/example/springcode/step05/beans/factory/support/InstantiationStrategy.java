@@ -6,11 +6,11 @@ import com.example.springcode.step05.beans.factory.config.BeanDefinition;
 import java.lang.reflect.Constructor;
 
 /**
- * 实例化类策略接口
+ * 实例化创建Bean类策略的接口
  */
 public interface InstantiationStrategy {
     /**
-     * 实例化类
+     * 实例化Bean类的方法 需要实现类实现
      *
      * @param beanDefinition Bean定义
      * @param beanName       Bean名称

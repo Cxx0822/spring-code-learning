@@ -1,8 +1,12 @@
 package com.example.springcode.step05.beans.test;
 
+import com.example.springcode.step05.beans.PropertyValue;
+import com.example.springcode.step05.beans.PropertyValues;
 import com.example.springcode.step05.beans.factory.config.BeanDefinition;
+import com.example.springcode.step05.beans.factory.config.BeanReference;
 import com.example.springcode.step05.beans.factory.support.DefaultListableBeanFactory;
-import com.example.springcode.step05.beans.service.DemoService;
+import com.example.springcode.step05.beans.test.bean.UserDao;
+import com.example.springcode.step05.beans.test.bean.UserService;
 
 public class TestBeanFactory05 {
     public void test() {
@@ -10,22 +14,32 @@ public class TestBeanFactory05 {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
         // 2. 实例化自定义Bean
-        BeanDefinition beanDefinition = new BeanDefinition(DemoService.class);
+        BeanDefinition userDaoBeanDefinition = new BeanDefinition(UserDao.class);
 
         // 3. 将自定义的Bean注册到Bean工厂中
-        beanFactory.registerBeanDefinition("demoService", beanDefinition);
+        beanFactory.registerBeanDefinition("userDao", userDaoBeanDefinition);
 
-        // 4.通过Bean工厂获取自定义的Bean
-        DemoService demoService = (DemoService) beanFactory.getBean("demoService");
+        // 4. 封装属性值
+        PropertyValues propertyValues = new PropertyValues();
+        // 增加普通属性
+        propertyValues.addPropertyValue(new PropertyValue("id", "10001"));
+        // 增加对象属性
+        propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
 
-        // 5.调用自定义Bean的方法
-        demoService.test();
+        // 5. 实例化自定义Bean
+        BeanDefinition userServiceBeanDefinition  = new BeanDefinition(UserService.class, propertyValues);
+
+        // 6. 将自定义的Bean注册到Bean工厂中
+        beanFactory.registerBeanDefinition("userService", userServiceBeanDefinition);
+
+        // 7. 获取UserService
+        UserService userService = (UserService) beanFactory.getBean("userService");
+        userService.queryUserInfo();
     }
 }
 
 // 说明文档
 // 对比04的版本 主要增加了为Bean对象注入属性的功能
-// 1. 定义了一个根据bean名称实例化Bean类的策略接口InstantiationStrategy
-// 2. 定义了两种具体实例化Bean类的策略类SimpleInstantiationStrategy和CglibSubclassingInstantiationStrategy
-//    主要原理就是根据反射获取类的信息,并判断是否包含构造函数来实例化类
-// 3. 更新了AbstractAutowireCapableBeanFactory类的创建Bean的方法
+// 1. 定义了一个属性值类PropertyValue和属性值列表类PropertyValues
+// 2. 增加了AbstractAutowireCapableBeanFactory基类中创建Bean方法的填充属性功能
+// 3. 增加了BeanDefinition定义类的带属性值的构造方法

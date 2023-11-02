@@ -14,12 +14,12 @@ import java.lang.reflect.Constructor;
  */
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory {
     /**
-     * 实例化策略
+     * 具体实例化创建Bean对象的 实例化策略
      */
     private InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
 
     /**
-     * 创建Bean对象
+     * 具体创建Bean对象的方法
      *
      * @param beanName       Bean名称
      * @param beanDefinition Bean定义
@@ -54,10 +54,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      */
     protected Object createBeanInstance(BeanDefinition beanDefinition, String beanName, Object[] args) {
         Constructor constructorToUse = null;
-        // 从Bean定义中获取Bean Class信息
+        // 通过反射 从Bean定义中获取Bean Class信息
         Class<?> beanClass = beanDefinition.getBeanClass();
 
-        // 获取类的所有构造函数信息
+        // 获取Bean Class 所有构造函数信息
         Constructor<?>[] declaredConstructors = beanClass.getDeclaredConstructors();
 
         for (Constructor ctor : declaredConstructors) {
@@ -69,25 +69,35 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             }
         }
 
-        // 实例化Bean类
+        // 选用相应的策略 实例化Bean类
         return getInstantiationStrategy().instantiate(beanDefinition, beanName, constructorToUse, args);
     }
 
+    /**
+     * 填充Bean对象属性值
+     *
+     * @param beanName       Bean名称
+     * @param bean           Bean
+     * @param beanDefinition Bean定义
+     */
     protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
         try {
+            // 拿到所有的属性值
             PropertyValues propertyValues = beanDefinition.getPropertyValues();
 
+            // 遍历属性值 填充属性
             for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
                 String name = propertyValue.getName();
                 Object value = propertyValue.getValue();
 
-                // 是否是BeanReference类的实例
+                // 判断该属性值是否是Bean对象
                 if (value instanceof BeanReference) {
                     BeanReference beanReference = (BeanReference) value;
+                    // 先拿到Bean对象名称 在拿到具体的Bean对象类
                     value = getBean(beanReference.getBeanName());
                 }
 
-                // 属性填充
+                // 使用工具类 属性填充
                 BeanUtil.setFieldValue(bean, name, value);
             }
         } catch (Exception exception) {

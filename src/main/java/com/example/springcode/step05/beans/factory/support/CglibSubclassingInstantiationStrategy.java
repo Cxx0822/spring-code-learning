@@ -8,7 +8,7 @@ import org.springframework.cglib.proxy.NoOp;
 import java.lang.reflect.Constructor;
 
 /**
- * 实例化Bean的类
+ * 实例化创建Bean类的策略 基于动态代理的原理
  */
 public class CglibSubclassingInstantiationStrategy implements InstantiationStrategy {
     @Override

@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * 实例化Bean的类
+ * 实例化创建Bean类的策略 基于反射的原理
  */
 public class SimpleInstantiationStrategy implements InstantiationStrategy {
     @Override

@@ -34,6 +34,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
     /**
      * 实现BeanFactory的获取Bean方法
+     * Bean在初始时并没有创建 只会在获取Bean时，如果没有获取到则进行创建
      *
      * @param name Bean名称
      * @param args 参数
@@ -63,7 +64,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 
     /**
-     * 虚方法 创建Bean
+     * 虚方法 创建Bean 需要由子类去实现
      *
      * @param beanName       Bean名称
      * @param beanDefinition Bean定义
