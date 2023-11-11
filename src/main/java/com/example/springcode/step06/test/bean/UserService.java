@@ -1,4 +1,4 @@
-package com.example.springcode.step05.beans.test.bean;
+package com.example.springcode.step06.test.bean;
 
 /**
  * @Author: Cxx

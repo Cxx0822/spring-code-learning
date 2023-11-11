@@ -8,6 +8,11 @@ import com.example.springcode.step05.beans.factory.support.DefaultListableBeanFa
 import com.example.springcode.step05.beans.test.bean.UserDao;
 import com.example.springcode.step05.beans.test.bean.UserService;
 
+/**
+ * @Author: Cxx
+ * @Date: 2023/11/11 17:08
+ * @Description:
+ */
 public class TestBeanFactory05 {
     public void test() {
         // 1. 初始化BeanFactory
