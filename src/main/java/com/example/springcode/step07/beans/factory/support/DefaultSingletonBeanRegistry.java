@@ -27,6 +27,11 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
         return singletonObjects.get(beanName);
     }
 
+    @Override
+    public void destroySingletons() {
+
+    }
+
     /**
      * 注册单例Bean方法
      *

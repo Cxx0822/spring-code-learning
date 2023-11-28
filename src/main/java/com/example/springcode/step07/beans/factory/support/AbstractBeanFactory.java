@@ -1,15 +1,21 @@
 package com.example.springcode.step07.beans.factory.support;
 
-import com.example.springcode.step07.beans.factory.BeanFactory;
 import com.example.springcode.step07.beans.factory.config.BeanDefinition;
 import com.example.springcode.step07.beans.BeansException;
+import com.example.springcode.step07.beans.factory.config.BeanPostProcessor;
+import com.example.springcode.step07.beans.factory.config.ConfigurableBeanFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: Cxx
  * @Date: 2023/11/11 15:25
  * @Description: 抽象Bean工厂 继承单例Bean注册类 实现Bean工厂
  */
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
+
     @Override
     public Object getBean(String name) throws BeansException {
         return doGetBean(name, null);
@@ -66,4 +72,14 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
      * @throws BeansException Bean异常
      */
     protected abstract Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException;
+
+    @Override
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        this.beanPostProcessors.remove(beanPostProcessor);
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
+    }
 }

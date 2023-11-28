@@ -9,7 +9,7 @@ import com.example.springcode.step07.test.bean.UserService;
  * @Date: 2023/11/11 17:08
  * @Description:
  */
-public class TestBeanFactory06 {
+public class TestBeanFactory07 {
     public void test() {
         // 1. 初始化Bean工厂
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();

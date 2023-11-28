@@ -2,6 +2,7 @@ package com.example.springcode.step07.beans.factory.config;
 
 /**
  * 单例Bean注册 接口
+ *
  * @author Cxx
  */
 public interface SingletonBeanRegistry {
@@ -12,4 +13,9 @@ public interface SingletonBeanRegistry {
      * @return bean对象
      */
     Object getSingleton(String beanName);
+
+    /**
+     * 销毁单例对象
+     */
+    void destroySingletons();
 }
