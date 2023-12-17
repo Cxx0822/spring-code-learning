@@ -3,11 +3,12 @@ package com.example.springcode.step03.beans.factory;
 import com.example.springcode.step03.beans.BeansException;
 
 /**
- * Bean工厂
+ * 基础Bean工厂接口
+ * @author Cxx
  */
 public interface BeanFactory {
     /**
-     * 获取Bean对象
+     * 获取Bean对象接口
      *
      * @param name Bean名称
      * @return Bean对象

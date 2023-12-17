@@ -7,12 +7,13 @@ import java.util.Map;
 
 /**
  * 单例Bean注册的实现  实现单例Bean注册接口
+ * @author Cxx
  */
 public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
     /**
      * Bean存储
      */
-    private Map<String, Object> singletonObjects = new HashMap<>();
+    private final Map<String, Object> singletonObjects = new HashMap<>();
 
     /**
      * 实现获取单例Bean对象的接口

@@ -2,6 +2,7 @@ package com.example.springcode.step03.beans.factory.config;
 
 /**
  * 单例Bean注册 接口
+ * @author Cxx
  */
 public interface SingletonBeanRegistry {
     /**

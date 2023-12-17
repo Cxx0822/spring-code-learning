@@ -6,9 +6,9 @@ import com.example.springcode.step03.beans.factory.config.BeanDefinition;
 
 /**
  * 抽象Bean工厂 继承单例Bean注册类 实现Bean工厂
+ * @author Cxx
  */
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
-
     /**
      * 实现BeanFactory的获取Bean方法
      *
