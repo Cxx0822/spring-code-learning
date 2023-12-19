@@ -1,4 +1,4 @@
-package com.example.springcode.io;
+package com.example.springcode.core.io;
 
 import org.springframework.util.Assert;
 
@@ -19,6 +19,10 @@ public class UrlResource implements Resource {
      */
     private final URL url;
 
+    /**
+     * 构造函数
+     * @param url url路径
+     */
     public UrlResource(URL url) {
         Assert.notNull(url, "URL must not be null");
         this.url = url;

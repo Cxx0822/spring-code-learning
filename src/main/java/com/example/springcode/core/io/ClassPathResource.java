@@ -1,4 +1,4 @@
-package com.example.springcode.io;
+package com.example.springcode.core.io;
 
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
@@ -23,15 +23,24 @@ public class ClassPathResource implements Resource {
      */
     private final ClassLoader classLoader;
 
+    /**
+     * 构造函数
+     * @param path classPath路径
+     */
     public ClassPathResource(String path) {
         this(path, (ClassLoader) null);
     }
 
+    /**
+     * 构造函数
+     * @param path        classPath路径
+     * @param classLoader 类加载器
+     */
     public ClassPathResource(String path, ClassLoader classLoader) {
         // 路径不能为空
         Assert.notNull(path, "Path must not be null");
         this.path = path;
-        // 初始化类加载器
+        // 初始化类加载器 如果为空则使用默认的
         this.classLoader = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
     }
 

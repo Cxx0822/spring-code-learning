@@ -8,10 +8,30 @@ package com.example.springcode.test.bean;
 public class UserService {
     private String id;
 
+    private String company;
+
+    private String location;
+
     private UserDao userDao;
 
     public String queryUserInfo() {
         return userDao.queryUserName(id);
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getId() {

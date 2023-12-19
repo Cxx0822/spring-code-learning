@@ -4,7 +4,7 @@ package com.example.springcode.context.support;
 import com.example.springcode.beans.factory.support.BeanDefinitionRegistry;
 import com.example.springcode.beans.factory.support.DefaultListableBeanFactory;
 import com.example.springcode.beans.factory.xml.XmlBeanDefinitionReader;
-import com.example.springcode.io.ResourceLoader;
+import com.example.springcode.core.io.ResourceLoader;
 
 /**
  * @Author: Cxx
@@ -21,5 +21,9 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableA
         }
     }
 
+    /**
+     * 配置文件路径信息
+     * @return 路径信息
+     */
     protected abstract String[] getConfigLocations();
 }

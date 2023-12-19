@@ -16,7 +16,6 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 
     /**
      * 从XML中加载BeanDefinition 并刷新上下文
-     *
      * @param configLocations 配置
      * @throws BeansException Bean异常
      */

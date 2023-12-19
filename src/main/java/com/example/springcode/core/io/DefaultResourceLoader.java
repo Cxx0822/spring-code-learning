@@ -1,4 +1,4 @@
-package com.example.springcode.io;
+package com.example.springcode.core.io;
 
 import org.springframework.util.Assert;
 

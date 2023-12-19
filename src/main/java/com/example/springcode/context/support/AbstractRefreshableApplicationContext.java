@@ -16,19 +16,27 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
     protected void refreshBeanFactory() throws BeansException {
         //  实例化DefaultListableBeanFactory
         DefaultListableBeanFactory beanFactory = createBeanFactory();
-        // 加载资源配置
+        // 加载Bean定义
         loadBeanDefinitions(beanFactory);
         this.beanFactory = beanFactory;
     }
 
+    /**
+     * 创建Bean工厂
+     * @return Bean工厂
+     */
     private DefaultListableBeanFactory createBeanFactory() {
         return new DefaultListableBeanFactory();
     }
 
+    /**
+     * 加载Bean定义
+     * @param beanFactory Bean工厂
+     */
     protected abstract void loadBeanDefinitions(DefaultListableBeanFactory beanFactory);
 
     @Override
     protected ConfigurableListableBeanFactory getBeanFactory() {
-        return (ConfigurableListableBeanFactory) beanFactory;
+        return beanFactory;
     }
 }

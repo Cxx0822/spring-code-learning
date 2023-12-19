@@ -7,9 +7,9 @@ import com.example.springcode.beans.factory.support.AbstractBeanDefinitionReader
 import com.example.springcode.beans.factory.support.BeanDefinitionRegistry;
 import com.example.springcode.beans.PropertyValue;
 import com.example.springcode.beans.factory.config.BeanDefinition;
-import com.example.springcode.io.Resource;
+import com.example.springcode.core.io.Resource;
 import com.example.springcode.beans.BeansException;
-import com.example.springcode.io.ResourceLoader;
+import com.example.springcode.core.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -61,18 +61,24 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         }
     }
 
+    /**
+     * 真正执行 通过文件解析Bean定义 的类
+     * @param inputStream 资源文件
+     * @throws ClassNotFoundException 异常
+     */
     protected void doLoadBeanDefinitions(InputStream inputStream) throws ClassNotFoundException {
         Document doc = XmlUtil.readXML(inputStream);
         Element root = doc.getDocumentElement();
         NodeList childNodes = root.getChildNodes();
 
+        // 遍历文件节点
         for (int i = 0; i < childNodes.getLength(); i++) {
-            // 判断元素
+            // 判断是否为元素
             if (!(childNodes.item(i) instanceof Element)) {
                 continue;
             }
 
-            // 判断对象
+            // 判断是否为对象
             if (!"bean".equals(childNodes.item(i).getNodeName())) {
                 continue;
             }

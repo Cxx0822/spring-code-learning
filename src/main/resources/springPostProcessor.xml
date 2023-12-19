@@ -4,6 +4,11 @@
 
     <bean id="userService" class="com.example.springcode.test.bean.UserService">
         <property name="id" value="10001"/>
+        <property name="company" value="estun"/>
+        <property name="location" value="Beijing"/>
         <property name="userDao" ref="userDao"/>
     </bean>
+
+    <bean class="com.example.springcode.test.common.MyBeanPostProcessor"/>
+    <bean class="com.example.springcode.test.common.MyBeanFactoryPostProcessor"/>
 </beans>

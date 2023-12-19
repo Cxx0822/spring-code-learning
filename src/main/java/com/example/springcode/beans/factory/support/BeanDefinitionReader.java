@@ -1,8 +1,8 @@
 package com.example.springcode.beans.factory.support;
 
-import com.example.springcode.io.Resource;
+import com.example.springcode.core.io.Resource;
 import com.example.springcode.beans.BeansException;
-import com.example.springcode.io.ResourceLoader;
+import com.example.springcode.core.io.ResourceLoader;
 
 /**
  * @Author: Cxx
@@ -12,21 +12,18 @@ import com.example.springcode.io.ResourceLoader;
 public interface BeanDefinitionReader {
     /**
      * 获取Bean注册
-     *
      * @return Bean注册
      */
     BeanDefinitionRegistry getRegistry();
 
     /**
      * 获取资源加载器
-     *
      * @return 资源加载器
      */
     ResourceLoader getResourceLoader();
 
     /**
      * 加载Bean定义的方法
-     *
      * @param resource 资源
      * @throws BeansException 异常
      */

@@ -1,4 +1,4 @@
-package com.example.springcode.io;
+package com.example.springcode.core.io;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +11,6 @@ import java.io.InputStream;
 public interface Resource {
     /**
      * 获取InputStream流的方法
-     *
      * @return InputStream流
      * @throws IOException IO异常
      */

@@ -6,7 +6,7 @@ import com.example.springcode.beans.factory.config.BeanPostProcessor;
 import com.example.springcode.beans.BeansException;
 import com.example.springcode.beans.factory.ConfigurableListableBeanFactory;
 import com.example.springcode.context.ConfigurableApplicationContext;
-import com.example.springcode.io.DefaultResourceLoader;
+import com.example.springcode.core.io.DefaultResourceLoader;
 
 import java.util.Map;
 
@@ -34,10 +34,22 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         beanFactory.preInstantiateSingletons();
     }
 
+    /**
+     * 创建Bean工厂
+     * @throws BeansException Bean异常
+     */
     protected abstract void refreshBeanFactory() throws BeansException;
 
+    /**
+     * 获取Bean工厂
+     * @return Bean工厂
+     */
     protected abstract ConfigurableListableBeanFactory getBeanFactory();
 
+    /**
+     * 调用BeanFactoryPostProcessor
+     * @param beanFactory Bean工厂
+     */
     private void invokeBeanFactoryPostProcessor(ConfigurableListableBeanFactory beanFactory) {
         Map<String, BeanFactoryPostProcessor> beanFactoryPostProcessorMap = beanFactory.getBeansOfType(BeanFactoryPostProcessor.class);
         for (BeanFactoryPostProcessor beanFactoryPostProcessor : beanFactoryPostProcessorMap.values()) {
@@ -45,6 +57,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         }
     }
 
+    /**
+     * 注册BeanPostProcessor
+     * @param beanFactory Bean工厂
+     */
     private void registerBeanPostProcessor(ConfigurableListableBeanFactory beanFactory) {
         Map<String, BeanPostProcessor> beanPostProcessorMap = beanFactory.getBeansOfType(BeanPostProcessor.class);
         for (BeanPostProcessor beanPostProcessor : beanPostProcessorMap.values()) {

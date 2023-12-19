@@ -13,7 +13,6 @@ import java.util.Map;
 public interface ListableBeanFactory extends BeanFactory {
     /**
      * 按照类型返回Bean实例
-     *
      * @param type 类型
      * @param <T>  泛型
      * @return Bean实例
@@ -23,7 +22,6 @@ public interface ListableBeanFactory extends BeanFactory {
 
     /**
      * 获取所有的Bean名称
-     *
      * @return Bean名称
      */
     String[] getBeanDefinitionNames();

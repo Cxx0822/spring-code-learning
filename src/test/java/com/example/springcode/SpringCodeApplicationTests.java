@@ -5,6 +5,8 @@ import com.example.springcode.beans.PropertyValues;
 import com.example.springcode.beans.factory.config.BeanDefinition;
 import com.example.springcode.beans.factory.config.BeanReference;
 import com.example.springcode.beans.factory.support.DefaultListableBeanFactory;
+import com.example.springcode.beans.factory.xml.XmlBeanDefinitionReader;
+import com.example.springcode.context.support.ClassPathXmlApplicationContext;
 import com.example.springcode.test.bean.UserDao;
 import com.example.springcode.test.bean.UserService;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringCodeApplicationTests {
     @Test
     void test() {
-        test05();
+        test07();
     }
 
     private void test04() {
@@ -49,6 +51,25 @@ class SpringCodeApplicationTests {
         // 5. UserService 获取bean
         UserService userService = (UserService) beanFactory.getBean("userService");
         userService.queryUserInfo();
+    }
+
+    private void test06() {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        reader.loadBeanDefinitions("classpath:spring.xml");
+
+        UserService userService = beanFactory.getBean("userService", UserService.class);
+        System.out.println(userService.queryUserInfo());
+    }
+
+    private void test07() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:springPostProcessor.xml");
+
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        System.out.println(userService.getCompany());
+        System.out.println(userService.getLocation());
+        System.out.println(userService.queryUserInfo());
     }
 }
 
