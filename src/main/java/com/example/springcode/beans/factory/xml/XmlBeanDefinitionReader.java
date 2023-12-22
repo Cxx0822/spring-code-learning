@@ -20,7 +20,7 @@ import java.io.InputStream;
 /**
  * @Author: Cxx
  * @Date: 2023/11/11 16:07
- * @Description: 通过解析XML读取Bean定义加载类
+ * @Description: 通过解析xml文件注册Bean定义类
  */
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
@@ -63,6 +63,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
     /**
      * 真正执行 通过文件解析Bean定义 的类
+     * 解析完成后会注册Bean定义
      * @param inputStream 资源文件
      * @throws ClassNotFoundException 异常
      */
@@ -89,6 +90,10 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             String name = bean.getAttribute("name");
             String className = bean.getAttribute("class");
 
+            // 解析init-method destroy-method
+            String initMethod = bean.getAttribute("init-method");
+            String destroyMethodName = bean.getAttribute("destroy-method");
+
             // 获取Class
             Class<?> clazz = Class.forName(className);
             // 优先获取id作为bean名称
@@ -99,6 +104,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
             // 定义Bean
             BeanDefinition beanDefinition = new BeanDefinition(clazz);
+
+            // 设置init-method和destroy-method
+            beanDefinition.setInitMethodName(initMethod);
+            beanDefinition.setDestroyMethodName(destroyMethodName);
+
             // 读取属性并填充
             for (int j = 0; j < bean.getChildNodes().getLength(); j++) {
                 if (!(bean.getChildNodes().item(j) instanceof Element)) {
@@ -127,7 +137,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 throw new BeansException("Duplicate beanName[" + beanName + "] is not allowed");
             }
 
-            // 注册Bean定义
+            // 解析完成后注册Bean定义
             getRegistry().registerBeanDefinition(beanName, beanDefinition);
         }
     }

@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringCodeApplicationTests {
     @Test
     void test() {
-        test07();
+        test08();
     }
 
     private void test04() {
@@ -70,6 +70,15 @@ class SpringCodeApplicationTests {
         System.out.println(userService.getCompany());
         System.out.println(userService.getLocation());
         System.out.println(userService.queryUserInfo());
+    }
+
+    private void test08() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:springInitMethod.xml");
+        applicationContext.registerShutdownHook();
+
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        String result = userService.queryUserInfo();
+        System.out.println("测试结果: " + result);
     }
 }
 

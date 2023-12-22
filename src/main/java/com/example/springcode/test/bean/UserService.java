@@ -1,11 +1,14 @@
 package com.example.springcode.test.bean;
 
+import com.example.springcode.beans.factory.DisposableBean;
+import com.example.springcode.beans.factory.InitializingBean;
+
 /**
  * @Author: Cxx
  * @Date: 2023/11/11 17:08
  * @Description:
  */
-public class UserService {
+public class UserService implements InitializingBean, DisposableBean {
     private String id;
 
     private String company;
@@ -15,7 +18,7 @@ public class UserService {
     private UserDao userDao;
 
     public String queryUserInfo() {
-        return userDao.queryUserName(id);
+        return userDao.queryUserName(id) + "," + company + "," + location;
     }
 
     public String getCompany() {
@@ -48,5 +51,15 @@ public class UserService {
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("执行 destroy");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("执行 afterPropertiesSet");
     }
 }

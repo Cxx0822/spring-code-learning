@@ -5,7 +5,7 @@ import com.example.springcode.beans.BeansException;
 /**
  * @Author: Cxx
  * @Date: 2023/11/14 22:56
- * @Description: 修改新实例化Bean对象
+ * @Description: 修改新实例化Bean对象 会在实例化Bean之后调用
  */
 public interface BeanPostProcessor {
     /**

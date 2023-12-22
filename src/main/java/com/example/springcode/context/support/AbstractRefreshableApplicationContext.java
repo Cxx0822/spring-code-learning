@@ -7,7 +7,10 @@ import com.example.springcode.beans.factory.ConfigurableListableBeanFactory;
 /**
  * @Author: Cxx
  * @Date: 2023/11/28 22:31
- * @Description: 获取Bean工厂和加载资源
+ * @Description: 抽象可刷新应用上下文类
+ * 实现了创建Bean工厂和加载Bean定义的抽象方法
+ * 具体怎么加载Bean定义由继承类实现
+ * 比如AbstractXmlApplicationContext继承类规定了如何通过解析xml文件获取Bean定义的功能
  */
 public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
     private DefaultListableBeanFactory beanFactory;

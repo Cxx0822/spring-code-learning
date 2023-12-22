@@ -20,5 +20,6 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
         PropertyValues propertyValues = beanDefinition.getPropertyValues();
         propertyValues.addPropertyValue(new PropertyValue("company", "改为 estun"));
+        System.out.println("执行 MyBeanFactoryPostProcessor");
     }
 }
