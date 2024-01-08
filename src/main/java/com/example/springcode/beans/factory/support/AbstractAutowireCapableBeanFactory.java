@@ -2,8 +2,7 @@ package com.example.springcode.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
-import com.example.springcode.beans.factory.DisposableBean;
-import com.example.springcode.beans.factory.InitializingBean;
+import com.example.springcode.beans.factory.*;
 import com.example.springcode.beans.factory.config.AutowireCapableBeanFactory;
 import com.example.springcode.beans.factory.config.BeanDefinition;
 import com.example.springcode.beans.BeansException;
@@ -141,6 +140,19 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      * @return Bean对象
      */
     private Object initialBean(String beanName, Object bean, BeanDefinition beanDefinition) {
+        // 执行感知方法
+        if (bean instanceof Aware) {
+            if (bean instanceof BeanFactoryAware) {
+                ((BeanFactoryAware) bean).setBeanFactory(this);
+            }
+            if (bean instanceof BeanClassLoaderAware) {
+                ((BeanClassLoaderAware) bean).setBeanClassLoader(getBeanClassLoader());
+            }
+            if (bean instanceof BeanNameAware) {
+                ((BeanNameAware) bean).setBeanName(beanName);
+            }
+        }
+
         // 1. 执行BeanPostProcessor Before处理
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 
