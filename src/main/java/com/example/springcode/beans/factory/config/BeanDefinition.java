@@ -9,6 +9,19 @@ import com.example.springcode.beans.PropertyValues;
  */
 public class BeanDefinition {
     /**
+     * 单例模式
+     */
+    String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
+
+    /**
+     * 原型模式
+     * 单例模式和原型模式的区别就在于是否存放到内存中，
+     * 如果是原型模式那么就不会存放到内存中，每次获取都重新创建对象，
+     * 另外非 Singleton 类型的 Bean 不需要执行销毁方法。
+     */
+    String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
+
+    /**
      * Bean类对象
      */
     private Class<?> beanClass;
@@ -27,6 +40,21 @@ public class BeanDefinition {
      * 销毁方法名称
      */
     private String destroyMethodName;
+
+    /**
+     * 默认为单例模式
+     */
+    private String scope = SCOPE_SINGLETON;
+
+    /**
+     * 是否为单例模式
+     */
+    private boolean singleton = true;
+
+    /**
+     * 是否为原型模式
+     */
+    private boolean prototype = false;
 
     /**
      * 构造函数
@@ -102,5 +130,31 @@ public class BeanDefinition {
 
     public void setDestroyMethodName(String destroyMethodName) {
         this.destroyMethodName = destroyMethodName;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+        this.singleton = SCOPE_SINGLETON.equals(scope);
+        this.prototype = SCOPE_PROTOTYPE.equals(scope);
+    }
+
+    public boolean isSingleton() {
+        return singleton;
+    }
+
+    public void setSingleton(boolean singleton) {
+        this.singleton = singleton;
+    }
+
+    public boolean isPrototype() {
+        return prototype;
+    }
+
+    public void setPrototype(boolean prototype) {
+        this.prototype = prototype;
     }
 }
